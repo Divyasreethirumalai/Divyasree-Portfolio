@@ -7,4 +7,4 @@ app.use(express.json());
 app.get("/",(req,res)=>{
     res.send("Server running");
 });
-app.listen(5000,()=>console.log("Server started"));
+app.listen(8000,()=>console.log("Server started"));
