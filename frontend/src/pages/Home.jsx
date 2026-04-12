@@ -4,7 +4,7 @@ function Home() {
 
   useEffect(() => {
     console.log("useEffect running");
-    fetch("http://localhost:5000")
+    fetch("http://localhost:8000")
       .then(res => res.text())
       .then(data => console.log(data))
       .catch(err => console.error(err));
