@@ -6,6 +6,7 @@ import './App.css'
 
 import { BrowserRouter,Routes, Route} from "react-router-dom";
 import Home from "./pages/Home";
+import Analytics from "./pages/Analytics";
 
 function App() {
   const [count, setCount] = useState(0)
@@ -15,6 +16,7 @@ function App() {
       <BrowserRouter>
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/analytics" element={<Analytics/>}/>
       </Routes>
       </BrowserRouter>
     </>
