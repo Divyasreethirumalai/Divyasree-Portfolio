@@ -1,8 +1,36 @@
-import {useEffect} from "react";
+import {useEffect,useState} from "react";
 import {motion} from "framer-motion";
 import {Link} from "react-router-dom";
 
 function Home() {
+
+  const [portfolio, setPortfolio] = useState(null);
+
+  useEffect(() => {
+
+    fetch("http://localhost:8000/portfolio-data")
+      .then(res => res.json())
+      .then(data => {
+        console.log(data);
+        setPortfolio(data);
+      });
+    
+    fetch("http://localhost:8000/track", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        page: "/",
+        event: "visit"
+      })
+    });
+  }, []);
+
+  if (!portfolio) {
+    return <h1>Loading...</h1>;
+  }
+
   return (
     <div className="hero">
     <div className="hero-text">
@@ -18,7 +46,7 @@ function Home() {
       animate={{ opacity: 1, x:0 }}
       transition={{ duration: 0.8 }}
       >
-        Hi, I'm Divyasree T 
+        Hi, I'm {portfolio.name}
       </motion.h1>
 
       <motion.h2
@@ -26,7 +54,7 @@ function Home() {
         animate={{ opacity: 1 }}
         transition={{ delay: 0.5 }}
       >
-        Full Stack Developer
+        {portfolio.role}
       </motion.h2>
 
       <motion.p

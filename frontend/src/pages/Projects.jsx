@@ -1,59 +1,118 @@
+import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 
 function Projects() {
-  
-  const projects = [
-    {
-      title: "Portfolio Tracker System",
-      desc: "Built a full-stack portfolio with click tracking and analytics dashboard.",
-      tech: "React, Node.js, Express"
-    },
-    {
-      title: "Employee Salary Prediction",
-      desc: "Machine learning model with dashboard visualization.",
-      tech: "Python, ML, Streamlit"
-    },
-    {
-      title: "EasyBuy Website Clone",
-      desc: "Responsive e-commerce UI clone using Bootstrap.",
-      tech: "HTML, CSS, Bootstrap"
-    },
-    {
-      title: "To-Do List Web App",
-      desc: "Simple and stylish task manager with responsive UI.",
-      tech: "HTML, CSS, JavaScript"
-    },
-    {
-      title: "Disease Prediction (Research)",
-      desc: "Deep learning model to predict hypertension & diabetes (85% accuracy).",
-      tech: "Python, TensorFlow"
+
+  const [projects, setProjects] = useState([]);
+  const [filtered, setFiltered] = useState([]);
+
+  useEffect(() => {
+
+    fetch("http://localhost:8000/portfolio-data")
+      .then(res => res.json())
+      .then(data => {
+        setProjects(data.projects);
+        setFiltered(data.projects);
+      });
+
+  }, []);
+
+  const filterProjects = (category) => {
+
+    if (category === "All") {
+      setFiltered(projects);
     }
-  ];
+
+    else {
+      const filteredData = projects.filter(
+        (project) => project.category === category
+      );
+
+      setFiltered(filteredData);
+    }
+  };
 
   return (
-    <div className="project-grid">
+    <div className="page">
 
-      <h1>Projects</h1>
+      <motion.h1
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+      >
+        My Projects
+      </motion.h1>
 
-      <div style={{
-        display: "flex",
-        flexWrap: "wrap",
-        gap: "20px",
-        justifyContent: "center"
-      }}>
-    {projects.map((p, i) => (
-        <motion.div
-          key={i}
-          className="card"
-          initial={{ opacity: 0, y: 50 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: i * 0.2 }}
-        >
-            <h3>{p.title}</h3>
-            <p>{p.desc}</p>
-            <small>{p.tech}</small>
+      <div className="filter-buttons">
+
+        <button onClick={() => filterProjects("All")}>
+          All
+        </button>
+
+        <button onClick={() => filterProjects("ML")}>
+          ML
+        </button>
+
+        <button onClick={() => filterProjects("Web")}>
+          Web
+        </button>
+
+        <button onClick={() => filterProjects("Full Stack")}>
+          Full Stack
+        </button>
+
+      </div>
+
+      <div className="projects-grid">
+
+        {filtered.map((project, index) => (
+
+          <motion.div
+            key={index}
+            className="card"
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            whileHover={{ scale: 1.05 }}
+          >
+
+            <h2>{project.title}</h2>
+
+              <p style={{ marginTop: "10px" }}>
+                {project.description}
+              </p>
+
+              <div
+                style={{
+                  marginTop: "15px",
+                  display: "flex",
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                  flexWrap: "wrap",
+                  gap: "10px"
+                }}
+              >
+
+                <span
+                  style={{
+                    background: "#38bdf8",
+                    padding: "6px 12px",
+                    borderRadius: "20px",
+                    fontSize: "14px",
+                    color: "white"
+                  }}
+                >
+                  {project.category}
+                </span>
+
+                <span style={{ fontSize: "14px", color: "#cbd5e1" }}>
+                  {project.tech}
+                </span>
+
+              </div>
+
           </motion.div>
+
         ))}
+
       </div>
 
     </div>

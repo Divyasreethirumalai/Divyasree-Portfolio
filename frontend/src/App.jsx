@@ -1,5 +1,3 @@
-import './App.css'
-
 import { BrowserRouter,Routes, Route, Link} from "react-router-dom";
 import Home from "./pages/Home";
 import About from "./pages/About";
@@ -30,8 +28,8 @@ function App() {
         <Route path="/analytics" element={<Analytics/>}/>
         <Route path="/blog" element={<Blog />} />
         <Route path="/contact" element={<Contact />} />
-
       </Routes>
+      
       </BrowserRouter>
     </>
   );
