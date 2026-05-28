@@ -1,14 +1,111 @@
 const express = require("express");
 const fs=require("fs");
+const cors=require("cors");
+const rateLimit = require("express-rate-limit");
+
 const app=express();
 
-const cors=require("cors");
+const limiter = rateLimit({
+    windowMs: 60 * 1000,
+    max: 20,
+    message: "Too many requests. Try again later."
+});
+
 app.use(cors());
+app.use(limiter);
 app.use(express.json());
 app.get("/",(req,res)=>{
     res.send("Server running");
 });
 
+
+const data = require("./data.json");
+app.get("/portfolio-data", (req, res) => {
+    res.json(data);
+});
+
+app.post("/contact", (req, res) => {
+
+    const { name, email, message } = req.body;
+
+    if (!name || !email || !message) {
+    return res.status(400).send("All fields required");
+    }
+
+    const contactData = `
+    NAME: ${name}
+    EMAIL: ${email}
+    MESSAGE: ${message}
+    ------------------------
+    `;
+
+    fs.appendFile("contacts.txt", contactData, (err) => {
+
+        if (err) {
+            console.log(err);
+            return res.status(500).send("Error");
+        }
+
+        res.send("Message received");
+    });
+
+});
+
+app.get("/analytics-data", (req, res) => {
+
+    fs.readFile("tracker.log", "utf8", (err, data) => {
+
+        if (err) {
+            return res.status(500).send("Error reading log");
+        }
+
+        const logs = data.trim().split("\n");
+
+        const totalVisits = logs.length;
+
+        const uniqueIPs = new Set();
+
+        const pages = {};
+
+        logs.forEach((log) => {
+
+            const ipMatch = log.match(/IP:(.*?) PAGE:/);
+            const pageMatch = log.match(/PAGE:(.*?) UA:/);
+
+            if (ipMatch) {
+                uniqueIPs.add(ipMatch[1].trim());
+            }
+
+            if (pageMatch) {
+
+                const page = pageMatch[1].trim();
+
+                pages[page] = (pages[page] || 0) + 1;
+            }
+
+        });
+
+        let mostVisited = "";
+
+        let max = 0;
+
+        for (let page in pages) {
+
+            if (pages[page] > max) {
+                max = pages[page];
+                mostVisited = page;
+            }
+        }
+
+        res.json({
+            totalVisits,
+            uniqueVisitors: uniqueIPs.size,
+            mostVisited
+        });
+
+    });
+
+});
 
 app.post("/track",(req,res)=>{
     console.log("Track API hit");
@@ -54,7 +151,6 @@ app.get("/analytics", (req, res) => {
       }
     });
 
-    // find most visited page
     let mostVisitedPage = null;
     let max = 0;
 

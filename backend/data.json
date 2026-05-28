@@ -1,0 +1,44 @@
+{
+  "name": "Divyasree T",
+  "role": "Full Stack Developer",
+  "skills": [
+    "React",
+    "Node.js",
+    "Python",
+    "Machine Learning"
+  ],
+  
+  "projects": [
+  {
+    "title": "Employee Salary Prediction",
+    "category": "ML",
+    "description": "Built a machine learning model to predict employee salaries using Python and Scikit-learn.",
+    "tech": "Python, ML, Streamlit"
+  },
+  {
+    "title": "Portfolio Tracker",
+    "category": "Full Stack",
+    "description": "Developed a dynamic portfolio website with click tracking and analytics dashboard.",
+    "tech": "React, Node.js, Express"
+  },
+  {
+    "title": "Certificate Verifier",
+    "category": "Web",
+    "description": "Created a certificate verification system with responsive UI and validation features.",
+    "tech": "HTML, CSS, JavaScript"
+  },
+  {
+    "title": "Diabetes Prediction",
+    "category": "ML",
+    "description": "Designed a prediction model to identify diabetes risk using healthcare datasets.",
+    "tech": "Python, Pandas, Machine Learning"
+  },
+  {
+  "title": "Hypertension Prediction",
+  "category": "ML",
+  "description": "Developed a deep learning model to predict hypertension risk using healthcare datasets.",
+  "tech": "Python, TensorFlow"
+}
+]
+
+}
