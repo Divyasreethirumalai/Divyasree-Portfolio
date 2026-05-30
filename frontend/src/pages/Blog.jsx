@@ -32,8 +32,7 @@ function Blog() {
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: i * 0.2 }}
-            whileHover={{ scale: 1.03 }}
-          >
+            whileHover={{ scale: 1.03 }}>
             <h3>{blog.title}</h3>
             <p>{blog.desc}</p>
             <small>{blog.date}</small>

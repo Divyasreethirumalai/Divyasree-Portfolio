@@ -1,7 +1,6 @@
 import { motion } from "framer-motion";
 
 function About() {
-
   const skills = [
     "React", "Node.js", "Python",
     "HTML", "CSS", "Bootstrap",
@@ -21,19 +20,16 @@ function About() {
 
       <div>
       <h2 style={{ justifyContent:"center", alignItems:"center"}}>Skills</h2>
-
       <div style={{ display: "flex", gap: "20px", flexWrap: "wrap", justifyContent: "center" }}>
         {skills.map((skill, i) => (
           <motion.div
             key={i}
             className="card"
-            whileHover={{ scale: 1.1 }}
-          >
-            {skill}
+            whileHover={{ scale: 1.1 }}>
+              {skill}
           </motion.div>
         ))}
       </div>
-      
       </div>
     </div>
   );

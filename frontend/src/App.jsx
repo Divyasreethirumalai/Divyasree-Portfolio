@@ -7,11 +7,9 @@ import Blog from "./pages/Blog";
 import Contact from "./pages/Contact";
 
 function App() {
-
   return (
     <>
       <BrowserRouter>
-
       <nav style={{padding:"10px",background:"#eee"}}>
         <NavLink to="/" style={{margin:"10px"}}>Home</NavLink>
         <NavLink to="/about" style={{margin:"10px"}}>About</NavLink>
@@ -19,7 +17,6 @@ function App() {
         <NavLink to="/analytics" style={{margin:"10px"}}>Analytics</NavLink>
         <NavLink to="/blog" style={{margin:"10px"}}>blog</NavLink>
         <NavLink to="/contact" style={{margin:"10px"}}>Contact</NavLink>
-
       </nav>
       <Routes>
         <Route path="/" element={<Home />} />
@@ -28,8 +25,7 @@ function App() {
         <Route path="/analytics" element={<Analytics/>}/>
         <Route path="/blog" element={<Blog />} />
         <Route path="/contact" element={<Contact />} />
-      </Routes>
-      
+      </Routes>  
       </BrowserRouter>
     </>
   );

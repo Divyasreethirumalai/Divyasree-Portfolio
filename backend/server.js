@@ -60,39 +60,25 @@ app.get("/analytics-data", (req, res) => {
         }
 
         const logs = data.split("\n").filter(log => log.includes("IP:"));
-
         const totalVisits = logs.length;
-
         const uniqueIPs = new Set();
-
         const pages = {};
-
         const visitsPerDay = {};
 
         logs.forEach((log) => {
 
             const ipMatch = log.match(/IP:(.*?) PAGE:/);
-
             const pageMatch = log.match(/PAGE:(.*?) UA:/);
-
             const dateMatch = log.match(/\[(.*?)T/);
-
             if (ipMatch) {
                 uniqueIPs.add(ipMatch[1].trim());
             }
-
             if (pageMatch) {
-
                 const page = pageMatch[1].trim();
-
                 pages[page] = (pages[page] || 0) + 1;
             }
-
-            // REAL VISITS PER DAY
             if (dateMatch) {
-
                 const date = dateMatch[1];
-
                 visitsPerDay[date] =
                     (visitsPerDay[date] || 0) + 1;
             }
@@ -100,20 +86,14 @@ app.get("/analytics-data", (req, res) => {
         });
 
         let mostVisited = "";
-
         let max = 0;
-
         for (let page in pages) {
-
             if (pages[page] > max) {
-
                 max = pages[page];
-
                 mostVisited = page;
             }
         }
 
-        // CONVERT OBJECT → ARRAY
         const visitsArray = Object.keys(visitsPerDay).map(date => ({
             day: date,
             visits: visitsPerDay[date]
@@ -125,9 +105,7 @@ app.get("/analytics-data", (req, res) => {
             mostVisited,
             visitsPerDay: visitsArray
         });
-
     });
-
 });
 
 app.post("/track",(req,res)=>{
@@ -135,7 +113,6 @@ app.post("/track",(req,res)=>{
     const ip=req.headers["x-forwarded-for"]||req.socket.remoteAddress;
     const userAgent=req.headers["user-agent"];
     const{page,event}=req.body;
-
     const log = `[${new Date().toISOString()}] IP:${ip} PAGE:${page} UA:${userAgent} EVENT:${event}\n`;
     fs.appendFile("tracker.log",log,(err)=>{
         if(err) console.error(err);
@@ -148,9 +125,7 @@ app.listen(8000,()=>console.log("Server started on 8000"));
 app.get("/analytics", (req, res) => {
   fs.readFile("tracker.log", "utf-8", (err, data) => {
     if (err) return res.send("No data");
-
     const lines = data.trim().split("\n");
-
     let totalVisits = lines.length;
     let uniqueIPs = new Set();
     let pageCount = {};
@@ -162,12 +137,10 @@ app.get("/analytics", (req, res) => {
       const dateMatch = line.match(/\[(.*?)T/);
 
       if (ipMatch) uniqueIPs.add(ipMatch[1]);
-
       if (pageMatch) {
         const page = pageMatch[1];
         pageCount[page] = (pageCount[page] || 0) + 1;
       }
-
       if (dateMatch) {
         const date = dateMatch[1];
         visitsPerDay[date] = (visitsPerDay[date] || 0) + 1;
@@ -183,18 +156,5 @@ app.get("/analytics", (req, res) => {
         mostVisitedPage = page;
       }
     }
-
-    res.json({
-        totalVisits,
-        uniqueVisitors,
-        mostVisited,
-
-        visitsPerDay: [
-            { day: "Mon", visits: 12 },
-            { day: "Tue", visits: 18 },
-            { day: "Wed", visits: 22 },
-            { day: "Thu", visits: 15 }
-        ]
-      });
   });
 });
