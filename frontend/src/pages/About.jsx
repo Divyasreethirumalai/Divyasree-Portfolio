@@ -5,15 +5,14 @@ function About() {
   const skills = [
     "React", "Node.js", "Python",
     "HTML", "CSS", "Bootstrap",
-    "SQL", "Figma"
+    "SQL", "Figma" , "C Programming"
   ];
 
   return (
     <div className="hero">
-      <div>
+      <div style={{display:"flex", gap:"20px",justifyContent:"center",flexWrap:"wrap"}}>
       <h1>About Me</h1>
-
-      <p style={{ maxWidth: "700px", margin: "auto" }}>
+      <p>
         I am a Computer Science and Engineering student at Jeppiaar Institute of Technology 
         with a strong interest in full-stack development and machine learning. 
         I enjoy building real-world applications that are both scalable and user-friendly.
@@ -21,7 +20,7 @@ function About() {
       </div>
 
       <div>
-      <h2 style={{ marginTop: "40px" }}>Skills</h2>
+      <h2 style={{ justifyContent:"center", alignItems:"center"}}>Skills</h2>
 
       <div style={{ display: "flex", gap: "20px", flexWrap: "wrap", justifyContent: "center" }}>
         {skills.map((skill, i) => (

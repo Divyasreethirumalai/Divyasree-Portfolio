@@ -59,7 +59,7 @@ app.get("/analytics-data", (req, res) => {
             return res.status(500).send("Error reading log");
         }
 
-        const logs = data.trim().split("\n");
+        const logs = data.split("\n").filter(log => log.includes("IP:"));
 
         const totalVisits = logs.length;
 
@@ -67,10 +67,15 @@ app.get("/analytics-data", (req, res) => {
 
         const pages = {};
 
+        const visitsPerDay = {};
+
         logs.forEach((log) => {
 
             const ipMatch = log.match(/IP:(.*?) PAGE:/);
+
             const pageMatch = log.match(/PAGE:(.*?) UA:/);
+
+            const dateMatch = log.match(/\[(.*?)T/);
 
             if (ipMatch) {
                 uniqueIPs.add(ipMatch[1].trim());
@@ -83,6 +88,15 @@ app.get("/analytics-data", (req, res) => {
                 pages[page] = (pages[page] || 0) + 1;
             }
 
+            // REAL VISITS PER DAY
+            if (dateMatch) {
+
+                const date = dateMatch[1];
+
+                visitsPerDay[date] =
+                    (visitsPerDay[date] || 0) + 1;
+            }
+
         });
 
         let mostVisited = "";
@@ -92,15 +106,24 @@ app.get("/analytics-data", (req, res) => {
         for (let page in pages) {
 
             if (pages[page] > max) {
+
                 max = pages[page];
+
                 mostVisited = page;
             }
         }
 
+        // CONVERT OBJECT → ARRAY
+        const visitsArray = Object.keys(visitsPerDay).map(date => ({
+            day: date,
+            visits: visitsPerDay[date]
+        }));
+
         res.json({
             totalVisits,
             uniqueVisitors: uniqueIPs.size,
-            mostVisited
+            mostVisited,
+            visitsPerDay: visitsArray
         });
 
     });
@@ -162,10 +185,16 @@ app.get("/analytics", (req, res) => {
     }
 
     res.json({
-      totalVisits,
-      uniqueVisitors: uniqueIPs.size,
-      mostVisitedPage,
-      visitsPerDay
-    });
+        totalVisits,
+        uniqueVisitors,
+        mostVisited,
+
+        visitsPerDay: [
+            { day: "Mon", visits: 12 },
+            { day: "Tue", visits: 18 },
+            { day: "Wed", visits: 22 },
+            { day: "Thu", visits: 15 }
+        ]
+      });
   });
 });

@@ -1,6 +1,7 @@
 import {useEffect,useState} from "react";
 import {motion} from "framer-motion";
 import {Link} from "react-router-dom";
+import profileImg from "../assets/Divyasree.jpg";
 
 function Home() {
 
@@ -28,7 +29,11 @@ function Home() {
   }, []);
 
   if (!portfolio) {
-    return <h1>Loading...</h1>;
+    return(
+      <div className="loading">
+       <h1>Loading...</h1>
+      </div>
+    );
   }
 
   return (
@@ -61,7 +66,6 @@ function Home() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1 }}
-        style={{ maxWidth: "600px", margin: "20px auto" }}
       >
         Computer Science student passionate about building user-friendly
         and scalable web applications. Skilled in React, Node.js, Python,
@@ -71,12 +75,6 @@ function Home() {
       <motion.button
         whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.9 }}
-        style={{
-          background: "linear-gradient(45deg, #38bdf8, #a78bfa)",
-          border: "none",
-          padding: "10px 20px",
-          borderRadius: "8px"
-        }} 
       >
         View Projects
       </motion.button>
@@ -88,7 +86,10 @@ function Home() {
       animate={{y:[0,-15,0]}}
       transition={{repeat:Infinity,duration:3}}
       >
-        {"Profile"}
+      <img
+        src={profileImg}
+        alt="Profile"
+      />
       </motion.div>
     </div>
   );

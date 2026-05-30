@@ -1,4 +1,4 @@
-import { BrowserRouter,Routes, Route, Link} from "react-router-dom";
+import { BrowserRouter,Routes, Route, NavLink} from "react-router-dom";
 import Home from "./pages/Home";
 import About from "./pages/About";
 import Projects from "./pages/Projects";
@@ -13,12 +13,12 @@ function App() {
       <BrowserRouter>
 
       <nav style={{padding:"10px",background:"#eee"}}>
-        <Link to="/" style={{margin:"10px"}}>Home</Link>
-        <Link to="/about" style={{margin:"10px"}}>About</Link>
-        <Link to="/projects" style={{margin:"10px"}}>Projects</Link>
-        <Link to="/analytics" style={{margin:"10px"}}>Analytics</Link>
-        <Link to="/blog" style={{margin:"10px"}}>blog</Link>
-        <Link to="/contact" style={{margin:"10px"}}>Contact</Link>
+        <NavLink to="/" style={{margin:"10px"}}>Home</NavLink>
+        <NavLink to="/about" style={{margin:"10px"}}>About</NavLink>
+        <NavLink to="/projects" style={{margin:"10px"}}>Projects</NavLink>
+        <NavLink to="/analytics" style={{margin:"10px"}}>Analytics</NavLink>
+        <NavLink to="/blog" style={{margin:"10px"}}>blog</NavLink>
+        <NavLink to="/contact" style={{margin:"10px"}}>Contact</NavLink>
 
       </nav>
       <Routes>
