@@ -11,7 +11,7 @@ function Projects() {
   const [error, setError] = useState("");
 
   useEffect(() => {
-    fetch("http://localhost:8000/portfolio-data")
+    fetch("https://divyasree-portfolio-backend.onrender.com/portfolio-data")
       .then((res) => {
         if (!res.ok) {
           throw new Error("Failed to fetch portfolio data");
