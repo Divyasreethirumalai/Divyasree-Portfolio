@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import profileImg from "../assets/Divyasree.jpg";
-import DivyasreeResume from "../assets/Divyasree_T_Resume.pdf";
+import DivyasreeResume from "../assets/DIVYASREE_T_resume.pdf";
 
 function Home() {
   const [portfolio, setPortfolio] = useState(null);
