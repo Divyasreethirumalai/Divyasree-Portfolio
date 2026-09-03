@@ -7,38 +7,66 @@
     "Python",
     "Machine Learning"
   ],
-  
   "projects": [
-  {
-    "title": "Employee Salary Prediction",
-    "category": "ML",
-    "description": "Built a machine learning model to predict employee salaries using Python and Scikit-learn.",
-    "tech": "Python, ML, Streamlit"
-  },
-  {
-    "title": "Portfolio Tracker",
-    "category": "Full Stack",
-    "description": "Developed a dynamic portfolio website with click tracking and analytics dashboard.",
-    "tech": "React, Node.js, Express"
-  },
-  {
-    "title": "Certificate Verifier",
-    "category": "Web",
-    "description": "Created a certificate verification system with responsive UI and validation features.",
-    "tech": "HTML, CSS, JavaScript"
-  },
-  {
-    "title": "Diabetes Prediction",
-    "category": "ML",
-    "description": "Designed a prediction model to identify diabetes risk using healthcare datasets.",
-    "tech": "Python, Pandas, Machine Learning"
-  },
-  {
-  "title": "Hypertension Prediction",
-  "category": "ML",
-  "description": "Developed a deep learning model to predict hypertension risk using healthcare datasets.",
-  "tech": "Python, TensorFlow"
-}
-]
-
+    {
+      "title": "CareerTwin AI",
+      "category": "Full Stack",
+      "type": "Final Year Project",
+      "featured": true,
+      "description": "An AI-powered career platform designed to help students evaluate their resumes, explore career opportunities, and track their professional growth.",
+      "tech": "React.js, Tailwind CSS, JavaScript",
+      "github": "",
+      "demo": ""
+    },
+    {
+      "title": "Mini CRM",
+      "category": "Full Stack",
+      "type": "Full Stack Web Application",
+      "featured": false,
+      "description": "Developed a responsive CRM application with React.js, integrated backend APIs, and PostgreSQL database connectivity for managing application data.",
+      "tech": "React.js, Node.js, PostgreSQL, Netlify, Render",
+      "github": "",
+      "demo": ""
+    },
+    {
+      "title": "SilverHands",
+      "category": "Full Stack",
+      "type": "Hackathon • AI + Full Stack",
+      "featured": false,
+      "description": "Built an AI-powered livelihood platform designed to connect and support users through digital opportunities. Owned the AI Intelligence module and contributed to the application workflow.",
+      "tech": "React, Vite, Node.js, Express, Google Gemini",
+      "github": "",
+      "demo": ""
+    },
+    {
+      "title": "Web Platform for Freelancers & Recruiters",
+      "category": "Full Stack",
+      "type": "Collaborative Web Project",
+      "featured": false,
+      "description": "Contributed to a web platform connecting freelancers and recruiters by implementing responsive interfaces, application features, and testing improvements.",
+      "tech": "HTML, CSS, JavaScript, React",
+      "github": "",
+      "demo": ""
+    },
+    {
+      "title": "Employee Salary Prediction",
+      "category": "AI/ML",
+      "type": "Machine Learning Project",
+      "featured": false,
+      "description": "Developed a machine learning model to predict employee salaries using Python and regression techniques, with an interactive dashboard for visualizing prediction results.",
+      "tech": "Python, Scikit-learn, Machine Learning, Streamlit",
+      "github": "",
+      "demo": ""
+    },
+    {
+      "title": "E-commerce Website Frontend Clone",
+      "category": "Frontend",
+      "type": "Frontend Web Project",
+      "featured": false,
+      "description": "Designed and developed a responsive e-commerce interface inspired by EasyBuy, focusing on reusable UI components and a consistent user experience across screen sizes.",
+      "tech": "HTML, CSS, Bootstrap, JavaScript",
+      "github": "",
+      "demo": ""
+    }
+  ]
 }
